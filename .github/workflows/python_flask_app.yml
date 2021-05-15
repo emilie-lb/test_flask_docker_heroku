@@ -20,37 +20,38 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      # Set up Python 3.6 environment
-      - name: Set up Python 3.6
+
+      - name: Set up Python 3.6 environment
         uses: actions/setup-python@v2
         with:
           python-version: "3.6"
-      # Install dependencies
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install pdoc3
           pip install flake8
           pip install -r requirements.txt
-        # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
       # # Check Python syntax errors or undefined names
       # # then exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
       #  - name: Lint with flake8
       #     run: |
       #       flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
       #       flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      # Run unit tests
-      - name: Test with unittest
+
+      - name: Run test with unittest
         run: |
           python -m unittest
-      # Generate pdoc
-      - name: auto pdoc
+
+      - name: Auto generate pdoc
         run: |
           pdoc3 --html -o tmp back/
           rm -rf docs
           mkdir -p docs/
           mv tmp/back/* docs/
           rm -rf tmp/
+
       - name: Commit files
         run: |
           echo ${{ github.ref }}
@@ -58,6 +59,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git commit -m "CI: Automated build push" -a | exit 0
+
       - name: Push changes
         if: github.ref == 'refs/heads/main'
         uses: ad-m/github-push-action@master
