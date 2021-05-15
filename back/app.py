@@ -4,24 +4,24 @@ from flask import Flask
 import logging
 # # import fonctions as fct
 
-APP = Flask(__name__)
-CORS(APP)
+app = Flask(__name__)
+# CORS(app)
 
-logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG)
 
 
-@APP.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def entry_point():
   """docstring zfzef zefzafza zvzeveza"""
   return "Hello"
 
-@APP.route('/hello_world')
+@app.route('/hello_world')
 def hello_world():
   """docstring zfzef zefzafza zvzeveza"""
   return 'Hello World'
 
 
-if __name__ == '__main__':
-  # app.config.update(ENV="development", DEBUG=True)
-  # app.run(host="0.0.0.0")
-  APP.run(debug=True)
+# if __name__ == '__main__':
+#   # app.config.update(ENV="development", DEBUG=True)
+#   # app.run(host="0.0.0.0")
+#   app.run(debug=True)
