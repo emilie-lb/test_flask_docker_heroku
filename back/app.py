@@ -1,11 +1,13 @@
-"""System module."""
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from flask_cors import CORS
-from flask import Flask 
+from flask import Flask, jsonify, request
 import logging
+import back.fonctions as fc
 # # import fonctions as fct
 
 app = Flask(__name__)
-# CORS(app)
+CORS(app)
 
 #logging.basicConfig(level=logging.DEBUG)
 
@@ -20,6 +22,18 @@ def hello_world():
   """docstring zfzef zefzafza zvzeveza"""
   return 'Hello World'
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    # station = request.form['station']
+    # direction = request.form['direction']
+    # liste_info = {'station' : station, 'direction': direction}
+    # # liste_info = ['BELVEDERE', 'TEST']
+    # return jsonify(liste_info)
+    station = request.args.get('station') +'ttttt'
+    destination = request.args.get('destination') + 'rrrrr'
+    passage = [station, destination]
+    return jsonify(passage)
+    # return "OK"
 
 # if __name__ == '__main__':
 #   # app.config.update(ENV="development", DEBUG=True)

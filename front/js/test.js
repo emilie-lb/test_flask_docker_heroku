@@ -1,6 +1,6 @@
 var myXMLHttp=new XMLHttpRequest();      
 para = location.search;
-var uri="http://127.0.0.1:5000/login"+para; 
+var uri="http://127.0.0.1:80/login"+para; 
 myXMLHttp.responseType = 'json';
 /* J'envoie ma requête GET synchrone (false) */ 
 myXMLHttp.open("get", uri, true);  /* envoi synchrone */
