@@ -65,3 +65,61 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+
+
+# #Docker Hub
+# #jobs: # loggin avec docker
+#   login: 
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Login to Docker Hub
+#         uses: docker/login-action@v1
+#         with:
+#           username: ${{ secrets.DOCKERHUB_USERNAME }}
+#           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+# #GitHub Packages Docker Registry
+# jobs: # loggin avec github (doit être configurer pour être reconnu pas docker)
+#   login:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Login to GitHub Packages Docker Registry
+#         uses: docker/login-action@v1
+#         with:
+#           registry: docker.pkg.github.com
+#           username: ${{ github.repository_owner }}
+#           password: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Build the docker-compose
+      #   run: docker-compose up -d
+      # - name: Test containers
+      #   run: docker run --network container:webapp-frontend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:5000/
+
+#       - name: Build and Push docker image
+#         uses: mr-smithers-excellent/docker-build-push@v3
+#         with:
+#           image: 18110104/test_flask_docker_heroku #repositoryname/image-name
+#           registry: docker.io
+#           username: ${{ secrets.DOCKER_USERNAME }}
+#           password: ${{ secrets.DOCKER_PASSWORD }}
+# # docker-compose action
+# steps:
+#   # need checkout before using compose-action
+#   - uses: actions/checkout@v2
+#   - uses: isbang/compose-action@v1.0.0
+#     with:
+#       compose-file: './docker/docker-compose.yml'
+#       down-flags: '--volumes'
+
+
+      - name: Deploy to Heroku
+        env:
+          HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+        if: github.ref == 'refs/heads/master' && job.status == 'success'
+        run: |
+          git remote add heroku https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git
+          git push heroku HEAD:master -f
+
+
