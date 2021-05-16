@@ -1,0 +1,13 @@
+# Byte-compiled / optimized / DLL files
+back/__pycache__/
+tests/__pycache__/
+__pycache__/
+
+
+# vscode extensions
+.vscode/
+
+# Environments
+myvenv/
+
+back/simplon.rc
