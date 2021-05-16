@@ -3,7 +3,7 @@
 from flask_cors import CORS
 from flask import Flask, jsonify, request
 import logging
-import back.fonctions as fc
+# import back.fonctions as fc
 # # import fonctions as fct
 
 app = Flask(__name__)
@@ -24,16 +24,11 @@ def hello_world():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # station = request.form['station']
-    # direction = request.form['direction']
-    # liste_info = {'station' : station, 'direction': direction}
-    # # liste_info = ['BELVEDERE', 'TEST']
-    # return jsonify(liste_info)
     station = request.args.get('station') +'ttttt'
     destination = request.args.get('destination') + 'rrrrr'
     passage = [station, destination]
     return jsonify(passage)
-    # return "OK"
+
 
 # if __name__ == '__main__':
 #   # app.config.update(ENV="development", DEBUG=True)

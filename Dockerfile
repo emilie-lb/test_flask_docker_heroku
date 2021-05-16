@@ -17,15 +17,3 @@ WORKDIR /app
 ENTRYPOINT [ "python" ]
 
 CMD [ "run.py" ]
-# CMD ["app.py"]
-
-# FROM python:3.8.1
-
-# ENV APP_HOME /app
-# WORKDIR $APP_HOME
-
-# COPY ./back /app
-
-# RUN pip install -r requirements.txt
-
-# ENTRYPOINT ["python run.py"]
